@@ -1,6 +1,6 @@
 # Community Specification Contributor License Agreement 1.0
 
-By making a Contribution to this repository, I agree to the terms of the following documents located at [https://github.com/CommunitySpecification/1.0](https://github.com/chps-dev/chps/)
+By making a Contribution to this repository, I agree to the terms of the following documents located at [https://github.com/chps-dev/chps](https://github.com/chps-dev/chps/)
 
 (a) [Community Specification License 1.0](Community_Specification_License-v1.md)
 
