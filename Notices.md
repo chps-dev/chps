@@ -4,9 +4,7 @@
 
 Contact for Code of Conduct issues or inquires:  
 
-Adrian Mouat adrian@chainguard.dev 
-
-Lisa Tagliaferri lisa@chainguard.dev
+Adrian Mouat or Lisa Tagliaferri, chps@chainguard.dev
 
 ## License Acceptance
 
