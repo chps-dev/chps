@@ -5,6 +5,7 @@
 Contact for Code of Conduct issues or inquires:  
 
 Adrian Mouat adrian@chainguard.dev 
+
 Lisa Tagliaferri lisa@chainguard.dev
 
 ## License Acceptance
