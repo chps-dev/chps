@@ -326,6 +326,7 @@ Note that in some cases the distribution will not keep old builds of packages, m
 build may break when the package is updated. In these cases, you will need to maintain a package
 mirror to guarantee the ability to rebuild old versions of images.
 
+Again there is a downside to pinning; you will need to regularly update the pins when rebuilding to get new versions and bugfixes. 
 
 #### SLSA Provenance Attestations
 
@@ -438,6 +439,10 @@ now, as they are easily exposed (for example in log output).
 Where possible, containers should support passing secrets by file instead. For example, see the
 [postgres official image](https://hub.docker.com/_/postgres/) which supports setting the
 `POSTGRES_PASSWORD_FILE` variable, which should point to a file mounted at runtime.
+
+This can be harder to achieve when containerising third-party software, but consider if you can
+create a wrapper script the reads the secret file and passes it to the application in whatever
+format it expects.
 
 #### Add Annotations
 
