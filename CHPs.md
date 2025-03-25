@@ -66,14 +66,18 @@ that goes into the container image came from.
 There are various configuration settings and patterns for improving container security. For example,
 [images should always define a user other than root to run as](#user-is-non-root).
 
- - **CVEs**
+ - **Vulnerabilities**
 
-There exists various tools to check software and container images for the presence of known Common
-Vulnerabilities and Exposures or CVEs. CVEs are publicly identified vulnerabilities in software
-applications and listed on databases such as the [National Vulnerability Database
+Vulnerabilities are exploitable flaws in software. A major goal of security is to reduce the
+number of vulnerabilities and their potential impact as much as possible. 
+
+Publicly identified vulnerabilities are are often assigned a Common Vulnerabilities and Exposure
+(CVE) identifier on a database such as [National Vulnerability Database
 (NVD)](https://nvd.nist.gov/). CVEs are graded from critical to negligible according to perceived
-impact. Because our knowledge of CVEs is constantly evolving, container images can only be graded on
-this vector at a point in time; the same image may be CVE free one week but not the next.
+impact. We recommend using tooling (commonly called vulnerability scanners) to check software and
+container images for the presence of known  CVEs.  Because our knowledge of CVEs is constantly
+evolving, container images can only be graded on this vector at a point in time; the same image
+may be CVE free one week but not the next.
 
 ## Levels
 
@@ -83,9 +87,9 @@ that people new to security can start by working on level 1, without worrying ab
 until they have understood and addressed simpler issues. The highest levels are intended to
 be aspirational, with few container images meeting this standard.
 
-It is likely that many container images will meet some items at various levels but not all. In terms
-of the CVE vector, the level will change over time. So a newly built image may have no known CVEs
-(level 5) but next week a new CVE could reduce that level.
+It is likely that many container images will meet some items at various levels but not all. In
+terms of the vulnerability vector, the level will change over time. So a newly built image may
+have no known CVEs (level 5) but next week a new CVE could reduce that level.
 
 Readers should feel empowered to use the advice in this document as best works for them and their
 organization.
@@ -103,7 +107,7 @@ levels of the Scoville scale.
 
 ## Summary Table
 
-| Level | Minimalism | Provenance | Configuration & Metadata | CVEs      |
+| Level | Minimalism | Provenance | Configuration & Metadata | Vulnerability |
 | ----- | ---------- | ---------- | ------------------------ | --------- |
 | **1 Pimiento** | • Use minimal base image | • Download from trusted source |  • No secrets in image | |
 | | | | | |
@@ -129,7 +133,7 @@ where your images are on the CHPs scale e.g:
 ![Minimalism](https://img.shields.io/badge/minimalism-A%2B-gold?style=flat-square&labelColor=%233443F4&color=%2301A178)
 ![Provenance](https://img.shields.io/badge/provenance-A-gold?style=flat-square&labelColor=%233443F4&color=%2381FEA0)
 ![Config](https://img.shields.io/badge/config-C-gold?style=flat-square&labelColor=%233443F4&color=%23F6EB61)
-![CVEs](https://img.shields.io/badge/CVEs-D-gold?style=flat-square&labelColor=%233443F4&color=%23FE5B3C)
+![Vulns](https://img.shields.io/badge/CVEs-D-gold?style=flat-square&labelColor=%233443F4&color=%23FE5B3C)
 
 There is a grade per vector and an overall grade. The grades are determined by assigning a point for
 each criteria the image meets. This isn't a perfect system, as not all criteria are "equal". We
@@ -426,7 +430,7 @@ action.
 
 #### Support Secrets via File
 
-The classic 12-factor app manifesto advocated for storing config in environment variables. This led
+The classic 12-factor app manifesto advocated for storing configuration in environment variables. This led
 to a lot of container images supporting secrets being passed in this manner. This is generally
 [considered bad advice](https://blog.arcjet.com/storing-secrets-in-env-vars-considered-harmful/)
 now, as they are easily exposed (for example in log output).
@@ -445,7 +449,7 @@ The [OCI Image Specification](https://github.com/opencontainers/image-spec/blob/
   - `org.opencontainers.image.source` for holding a link to any source repository for the image (e.g. GitHub)
 
 These annotations can help users identify images and use them correctly, as well as enabling
-automation (e.g. indexing the source repository of all images runnning in a cluster).
+automation (e.g. indexing the source repository of all images running in a cluster).
 
 #### Attach a Security Profile
 
@@ -461,7 +465,7 @@ Creating a security profile is a non-trivial task, but potentially worthwhile du
 containment and adherence to the least-privilege principle. Profiles can be associated with
 container images via attestations.
 
-### CVEs
+### Vulnerabilities
 
 This vector is concerned with the number of known
 [CVEs](https://en.wikipedia.org/wiki/Common_Vulnerabilities_and_Exposures) in the image. These are
@@ -499,4 +503,4 @@ The image contains no-known CVEs.
 
 Thanks to:
  - Dustin Kirkland, who came up with the original concept and list. 
- - Duffie Cooley, Brandon Mitchell, Jon Johnson and Jason Hall for feedback.
+ - Duffie Cooley, Brandon Mitchell, Rory McCune, Jon Johnson and Jason Hall for feedback.
