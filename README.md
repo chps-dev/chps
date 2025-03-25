@@ -1,5 +1,8 @@
 # Container Hardening Priorities (CHPs)
 
+<img align="right" src="https://github.com/chps-dev/chps/blob/main/img/chps-logo.png" alt="CHPs
+logo - a bowl of tortilla chips">
+
 This repository provides guidance on objectively classifying container images for security hardening. The [CHPs specification](./CHPs.md) details security criteria across 4 "vectors":
 
 - **Minimalism** – Reducing software packages and complexity  
