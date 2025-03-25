@@ -24,5 +24,5 @@ Please open issues or submit pull requests to help refine the specification or s
 ## License
 
 All CHPs specification content is provided under the
-[Community Specification License 1.0](LICENSE.md).
+[Community Specification License 1.0](License.md).
 
