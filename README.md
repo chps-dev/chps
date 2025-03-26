@@ -8,7 +8,7 @@ This repository provides guidance on objectively classifying container images fo
 - **Minimalism** – Reducing software packages and complexity  
 - **Provenance** – Verifying source and authenticity  
 - **Configuration & Metadata** – Applying secure defaults and best practices  
-- **CVEs** – Tracking known vulnerabilities at any point in time  
+- **Vulnerabilities** – Tracking known vulnerabilities at any point in time  
 
 ## Why CHPs?
 
@@ -18,7 +18,7 @@ CHPs help DevOps teams, image authors, and security practitioners quickly see wh
 
 1. **Read the Spec**: See [CHPs.md](./CHPs.md) for the complete classification levels.
 2. **Assess Your Image**: See how well your images rank across the criteria. Use the [CHPs Scorer](https://github.com/chps-dev/chps-scorer) project to do this automatically. 
-3. **Badge Your Projects**: Add badges showing how your images score across minimalism, provenance, configuration, and CVEs.
+3. **Badge Your Projects**: Add badges showing how your images score across minimalism, provenance, configuration, and vulnerabilities.
 
 ## Contributing
 
