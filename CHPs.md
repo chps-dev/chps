@@ -25,12 +25,13 @@ publish the results.
 
 ## Scope
 
-Scope of this document is limited to OCI Container configuration at build time. In particular we do
-not cover runtime configuration, which may be covered a separate document in the future. 
-For the purposes of this document we assume that the image author is trusted and will not
-intentionally insert malware. Application specific vulnerabilities (e.g. buffer overflows or malware
-in application code) are not considered although some of the criteria here may reduce the
-impact of such vulnerabilities.
+Scope of this document is limited to OCI Container image development, particularly during build pipelines.
+We do not cover runtime configuration, which may be covered a separate document in the
+future. For the purposes of this document we assume that the image author is trusted and will not
+intentionally insert malware. Software supply chain security is a large focus of this document;
+while the original author is considered trusted, details of how images are distributed and verified
+are in scope. Application specific vulnerabilities (e.g. buffer overflows or malware in application code) are not
+considered although some of the criteria here may reduce the impact of such vulnerabilities.
 
 The guidance is intended to be applicable to all container build systems, but where specific
 advice is given, it is generally assumed Dockerfiles are being used. People using other systems
@@ -49,8 +50,8 @@ complexity](https://www.chainguard.dev/unchained/image-sizes-miss-the-point) in 
 packages installed is a better measure of minimalism than raw image size.
 
 Minimalism becomes particularly important in "living off the land" attacks where trusted, legitimate
-tooling is leveraged by the attackers. Reducing the availability of these tools will make attackers
-will lives harder. 
+tooling is leveraged by the attackers. Reducing the availability of these tools makes attackers'
+lives harder. 
 
  - **Provenance**
 
@@ -75,9 +76,12 @@ Publicly identified vulnerabilities are are often assigned a Common Vulnerabilit
 (CVE) identifier on a database such as [National Vulnerability Database
 (NVD)](https://nvd.nist.gov/). CVEs are graded from critical to negligible according to perceived
 impact. We recommend using tooling (commonly called vulnerability scanners) to check software and
-container images for the presence of known  CVEs.  Because our knowledge of CVEs is constantly
-evolving, container images can only be graded on this vector at a point in time; the same image
-may be CVE free one week but not the next.
+container images for the presence of known  CVEs. Readers should not autaomtically dismiss lower
+graded CVES, due to the potential impact of _CVE chaining_, where multiple, possibly low impact
+vulnerabilities are exploited in combination to achieve a higher-impact attack. 
+
+Because our knowledge of CVEs is constantly evolving, container images can only be graded on this
+vector at a point in time; the same image may be CVE free one week but not the next.
 
 ## Levels
 
@@ -97,7 +101,7 @@ organization.
 The suggestions are intended to be objectively checkable, so images can be easily (and potentially
 automatically) graded. This provides a simple way to compare images against each other, but any
 comparisons should always be considered in context; an image that meets all the criteria here may
-have security deficiencies not present in image that only meets a few criteria. This list is not
+have security deficiencies not present in an image that only meets a few criteria. This list is not
 exhaustive and could not be exhaustive, always practice [defence in
 depth](https://en.wikipedia.org/wiki/Defense_in_depth_(computing)) and follow the [principle of
 least privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege).
@@ -256,7 +260,8 @@ they haven't been tampered with.
 There are multiple solutions for signing container images, including
 [sigstore](https://www.sigstore.dev/) and [notation](https://github.com/notaryproject/notation).
 [Keyless signing](https://docs.sigstore.dev/cosign/signing/overview/) means that there is no need to
-store a private key, significantly simplifying the set-up and maintenance burden of signing.
+store a private key, significantly simplifying the set-up and maintenance burden of signing. New
+users can refer to this [walkthrough on how to sign an image with cosign](https://edu.chainguard.dev/open-source/sigstore/cosign/how-to-sign-a-container-with-cosign/).
 
 For signing to be effective, signatures must be verified at some point. This can be done in
 with CLI tools like [cosign](https://github.com/sigstore/cosign) or platform specific integrations such as 
@@ -348,7 +353,7 @@ One way to attach in-toto attestations to a container is by using
 [SBOMs](https://en.wikipedia.org/wiki/Software_Bill_of_Materials) or Software Bill of Materials are
 a complete list of all the software inside an artifact. An SBOM should specify all the libraries
 used and their exact versions. This allows users to determine exactly what is in the container,
-which is useful multiple scenarios, but particularly when assessing organizational exposure to known
+which is useful in multiple scenarios, but particularly when assessing organizational exposure to known
 vulnerabilities.
 
 The two most common formats for SBOMs are [SPDX](https://spdx.dev/) and [CycloneDX](https://cyclonedx.org/).
@@ -486,7 +491,7 @@ document. There are [tools](https://github.com/openvex/vexctl) available to help
 documents which can be associated with container images via attestations.
 
 The grading here is only for a point-in-time; new CVEs are constantly being discovered over time, so
-the same container image is likely to report more vulnerabilities when scanned at a later date. 
+the same container image is likely to report more vulnerabilities when scanned at a later date.
 
 #### No critical
 
@@ -508,4 +513,4 @@ The image contains no-known CVEs.
 
 Thanks to:
  - Dustin Kirkland, who came up with the original concept and list. 
- - Duffie Cooley, Brandon Mitchell, Rory McCune, Jon Johnson and Jason Hall for feedback.
+ - Duffie Cooley, Brandon Mitchell, Rory McCune, Jon Johnson, Kyle Crane and Jason Hall for feedback.
